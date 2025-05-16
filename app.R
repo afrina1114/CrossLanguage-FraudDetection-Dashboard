@@ -3,10 +3,10 @@ library(ggplot2)
 library(dplyr)
 library(DT)
 
-# Load the results from Python
+
 data <- read.csv("fraud_results.csv")
 
-# UI layout
+
 ui <- fluidPage(
   titlePanel("💳 Fraud Detection Dashboard"),
   
@@ -23,7 +23,7 @@ ui <- fluidPage(
   )
 )
 
-# Server logic
+
 server <- function(input, output) {
   
   filtered_data <- reactive({
@@ -48,6 +48,6 @@ server <- function(input, output) {
   })
 }
 
-# Run app
+
 shinyApp(ui, server)
 
