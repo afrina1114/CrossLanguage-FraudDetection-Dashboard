@@ -13,29 +13,29 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 import joblib
 
-# Load dataset
+
 df = pd.read_csv("/content/creditcard.csv")
 
-# Split data
+
 df = df.dropna(subset=['Class'])
 X = df.drop(['Class'], axis=1)
 y = df['Class']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y)
 
-# Train model
+
 model = RandomForestClassifier(n_estimators=100)
 model.fit(X_train, y_train)
 
-# Save model
+
 joblib.dump(model, "fraud_rf_model.pkl")
 
-# Predict on test set
+
 predictions = model.predict(X_test)
 X_test['Prediction'] = predictions
 X_test['Actual'] = y_test.values
 
-# Save results
+
 X_test.to_csv("fraud_results.csv", index=False)
 
-# Evaluate
+
 print(classification_report(y_test, predictions))
